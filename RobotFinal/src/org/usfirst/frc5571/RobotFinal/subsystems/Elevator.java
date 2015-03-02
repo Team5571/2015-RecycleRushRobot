@@ -90,6 +90,11 @@ public class Elevator extends Subsystem {
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
 			cANTalonElev.set(cANTalonElev.getPosition());
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
+			cANTalonElev.ClearIaccum();
+			
+			//
+			
+			
 		}
 
 		// Change to closed loop control mode and move "count" ticks 
@@ -99,6 +104,7 @@ public class Elevator extends Subsystem {
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
 			cANTalonElev.set((cANTalonElev.getPosition()+count));
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
+			cANTalonElev.ClearIaccum();
 
 		}
 
@@ -110,6 +116,7 @@ public class Elevator extends Subsystem {
 			axis = Robot.oi.xboxController.getY();
 			cANTalonElev.set(axis*12.0); // need to scale the voltage by the joystick values;
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
+			cANTalonElev.ClearIaccum();
 
 		}
 
@@ -119,6 +126,8 @@ public class Elevator extends Subsystem {
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Speed);
 			cANTalonElev.set(DOWN_SPEED);
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
+			cANTalonElev.ClearIaccum();
+			
 
 		}
 
@@ -128,6 +137,7 @@ public class Elevator extends Subsystem {
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Speed);
 			cANTalonElev.set(UP_SPEED);
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
+			cANTalonElev.ClearIaccum();
 
 		}
 

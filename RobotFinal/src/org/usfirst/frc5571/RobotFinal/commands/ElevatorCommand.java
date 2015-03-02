@@ -36,55 +36,69 @@ public class  ElevatorCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		elevController.initCanPID();
+		//elevController.initElevLimits();
 		SmartDashboard.putString("Elev MODE:", "Initialized");
 		position_held = false;
+		elevController.showCanTalonStatus();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.right_yAxis > 0) {
-        	position_held = false;
-  		  if (!elevController.elevCurrenLimited()){
-  			elevController.upElev();
-  				SmartDashboard.putString("Elev MODE:", "Opening");
-  			}
-  			else{ // current limit exceeded
- 				if (!position_held) {
- 					elevController.holdCurrentPosition();
-  					SmartDashboard.putString("Elev MODE:", "OPEN CURRENT EXCEEDED");
-  					position_held = true;
-  				}
-  				elevController.servoHere();
-  			}
-      	//RobotMap.elevatorCANTalonElev.set(1);
-    		
-    	}else 
-    	if (Robot.oi.right_yAxis < 0) {
-        	position_held = false;
-  		  if (!elevController.elevCurrenLimited()){
-  			elevController.downElev();
-  				SmartDashboard.putString("Elev MODE:", "Opening");
-  			}
-  			else{ // current limit exceeded
-  				if (!position_held) {
-					elevController.holdCurrentPosition();
-  					SmartDashboard.putString("Elev MODE:", "OPEN CURRENT EXCEEDED");
-  					position_held = true;
-  				}
-  				elevController.servoHere();
-  			}
-      	//RobotMap.elevatorCANTalonElev.set(-1);
-    		
-    	}else
-    	if (Robot.oi.right_yAxis == 0) {
-    		elevController.servoHere();
-    	}
+    	if (Robot.oi.A_Button) { // close clamp with current limited protection
+			// axis = Robot.oi.xboxController.getY();
+			// RobotMap.testCAN_MotorCANTalon1.set(axis);
+			// elevController.positionMode();
+			// SmartDashboard.putString("MODE:", "Position");
+			// elevController.showCanTalonStatus();
+			// Close Clamp
+			if (!elevController.elevCurrenLimited()) {
+				elevController.upElev();
+				SmartDashboard.putString("Elevator MODE:", "Closing");
+			} else {
+				elevController.servoHere();
+				SmartDashboard.putString("Elevator MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
+			}
+		}
+
+		else if (Robot.oi.B_Button) { // open clamp with current limited
+										// protection
+			// open Clamp
+			if (!elevController.elevCurrenLimited()) {
+				elevController.downElev();
+				SmartDashboard.putString("Elevator MODE:", "Opening");
+				;
+			} else { // current limit exceeded
+
+				elevController.servoHere();
+				SmartDashboard.putString("Elevator MODE:", "OPEN CURRENT LIMIT EXCEEDED");
+			}
+
+		}
+//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
+//		else if (Robot.oi.A_Button) {
+//			elevController.positionMoveByCount(1000);
+//			SmartDashboard.putString("MODE:", "B - Move+1000");
+//
+//		}
+
+		//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
+		//		else if (Robot.oi.B_Button){ 
+//			elevController.positionMoveByCount(-1000);
+//			SmartDashboard.putString("MODE:", "B - Move-1000");
+//		}
+
+		else {
+			elevController.servoHere();
+		}
+		// Display status on every execute call
+		elevController.showCanTalonStatus();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	elevController.showCanTalonStatus();
+    	//elevController.showCanTalonStatus();
         return false;
+        
     }
 
     // Called once after isFinished returns true

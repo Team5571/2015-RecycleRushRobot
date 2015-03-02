@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc5571.RobotFinal.Robot;
+import org.usfirst.frc5571.RobotFinal.RobotMap;
 import org.usfirst.frc5571.RobotFinal.subsystems.Clamp;
 
 /**
@@ -41,54 +42,69 @@ public class  ClampCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		clampController.initCanPID();
-		clampController.initClampLimits();
+		//clampController.initClampLimits();
 		SmartDashboard.putString("Clamp MODE:", "Initialized");
 		position_held = false;
+		clampController.showCanTalonStatus();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.Bumper_L) {
-    		position_held = false;
-  		  if (!clampController.clampCurrenLimited()){
-  			clampController.openClamp();
-  			SmartDashboard.putString("Clamp MODE:", "Opening");
-  			}
-  			else{ // current limit exceeded
-  				if (!position_held) {
-  					clampController.holdCurrentPosition();
-  					SmartDashboard.putString("Clamp MODE:", "OPEN CURRENT EXCEEDED");
-  					position_held = true;
-  				}
-  				clampController.servoHere();
-  			}
-      	//RobotMap.clampCANTalonClamp.set(-1);
-  		  
-    		}else
-    			if (Robot.oi.Bumper_R) {
-    				position_held = false;
-    			  if (!clampController.clampCurrenLimited()){
-    			clampController.closeClamp();
-    				SmartDashboard.putString("Clamp MODE:", "Closing");
-    			}
-    			else{ // current limit exceeded
-    				if (!position_held) {
-    					clampController.holdCurrentPosition();
-    					SmartDashboard.putString("Clamp MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
-    					position_held = true;
-    				}
-    				clampController.servoHere();
-    			}
-    	  //RobotMap.clampCANTalonClamp.set(1);
-        } else {
-        	clampController.servoHere();
-        }
+		
+		if (Robot.oi.Bumper_R) { // close clamp with current limited protection
+			// axis = Robot.oi.xboxController.getY();
+			// RobotMap.testCAN_MotorCANTalon1.set(axis);
+			// clampController.positionMode();
+			// SmartDashboard.putString("MODE:", "Position");
+			// clampController.showCanTalonStatus();
+			// Close Clamp
+			if (!clampController.clampCuurenLimited()) {
+				clampController.closeClamp();
+				SmartDashboard.putString("Clamp MODE:", "Closing");
+			} else {
+				clampController.servoHere();
+				SmartDashboard.putString("Clamp MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
+			}
+		}
+
+		else if (Robot.oi.Bumper_L) { // open clamp with current limited
+										// protection
+			// open Clamp
+			if (!clampController.clampCuurenLimited()) {
+				clampController.openClamp();
+				SmartDashboard.putString("Clamp MODE:", "Opening");
+				;
+			} else { // current limit exceeded
+
+				clampController.servoHere();
+				SmartDashboard.putString("Clamp MODE:", "OPEN CURRENT LIMIT EXCEEDED");
+			}
+
+		}
+//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
+//		else if (Robot.oi.A_Button) {
+//			clampController.positionMoveByCount(1000);
+//			SmartDashboard.putString("MODE:", "B - Move+1000");
+//
+//		}
+
+		//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
+		//		else if (Robot.oi.B_Button){ 
+//			clampController.positionMoveByCount(-1000);
+//			SmartDashboard.putString("MODE:", "B - Move-1000");
+//		}
+
+		else {
+			clampController.servoHere();
+		}
+		// Display status on every execute call
+		clampController.showCanTalonStatus();
    }
 
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	clampController.showCanTalonStatus();
+    	//clampController.showCanTalonStatus();
         return false;
     }
 

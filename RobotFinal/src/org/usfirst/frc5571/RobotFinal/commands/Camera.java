@@ -35,7 +35,7 @@ public class  Camera extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cameras.cameraUSB();
+    	//Robot.cameras.cameraUSB();
     }
 
     // Make this return true when this Command no longer needs to run execute()
