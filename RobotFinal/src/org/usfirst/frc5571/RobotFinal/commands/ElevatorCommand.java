@@ -37,7 +37,7 @@ public class  ElevatorCommand extends Command {
     protected void initialize() {
 		elevController.initCanPID();
 		//elevController.initElevLimits();
-		SmartDashboard.putString("Elev MODE:", "Initialized");
+		SmartDashboard.putString("Elevatorlev MODE:", "Initialized");
 		position_held = false;
 		elevController.showCanTalonStatus();
     }
@@ -53,10 +53,10 @@ public class  ElevatorCommand extends Command {
 			// Close Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.upElev();
-				SmartDashboard.putString("Elevator MODE:", "Closing");
+				SmartDashboard.putString("Elevator MODE:", "UP");
 			} else {
 				elevController.servoHere();
-				SmartDashboard.putString("Elevator MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
+				SmartDashboard.putString("Elevator MODE:", "UP CURRENT LIMIT EXCEEDED");
 			}
 		}
 
@@ -65,12 +65,12 @@ public class  ElevatorCommand extends Command {
 			// open Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.downElev();
-				SmartDashboard.putString("Elevator MODE:", "Opening");
+				SmartDashboard.putString("Elevator MODE:", "DOWN");
 				;
 			} else { // current limit exceeded
 
 				elevController.servoHere();
-				SmartDashboard.putString("Elevator MODE:", "OPEN CURRENT LIMIT EXCEEDED");
+				SmartDashboard.putString("Elevator MODE:", "DOWN CURRENT LIMIT EXCEEDED");
 			}
 
 		}
@@ -88,6 +88,7 @@ public class  ElevatorCommand extends Command {
 //		}
 
 		else {
+			SmartDashboard.putString("Elevator MODE:", "HOLD POSITION");
 			elevController.servoHere();
 		}
 		// Display status on every execute call
@@ -100,7 +101,7 @@ public class  ElevatorCommand extends Command {
         return false;
         
     }
-
+ 
     // Called once after isFinished returns true
     protected void end() {
     }

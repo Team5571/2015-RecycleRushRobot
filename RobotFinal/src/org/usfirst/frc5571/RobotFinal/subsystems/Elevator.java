@@ -33,9 +33,9 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from CommandsS.
 	 double axis;
-		static double MAX_ELEV_CURRENT = 20.0;  // limit current to 3A  motor is rated at 36.91W 
-		static double DOWN_SPEED = 400;  // position change per 10 ms
-		static double UP_SPEED = -400;  // position change per 10 ms
+		static double MAX_ELEV_CURRENT = 30.0;  // limit current to 3A  motor is rated at 36.91W 
+		static double DOWN_SPEED = -400;  // position change per 10 ms
+		static double UP_SPEED = +400;  // position change per 10 ms
 		double p;
 		double i;;
 		double d;
@@ -51,20 +51,20 @@ public class Elevator extends Subsystem {
 		public void initCanPID() {
 
 			// Set PID values for Velocity and Position Mode here in profile 0
-			p = .6;
-			i = .00015;
-			d = 0.06;
-			f = 0.0005;
+			p = 1;
+			i = .005;
+			d = 0.05;
+			f = 10;
 			izone = 0;
-			ramprate = 36;  // this should leave the ramp rate uncapped.
+			ramprate = 144;  // this should leave the ramp rate uncapped.
 			profile = 0;
 			cANTalonElev.setPID(p, i, d, f, izone, ramprate, profile);
 
 			// Set PID values for Servo In Place Posisiotn Mode here in profile 1
 			p = .6;
 			i = .00015;
-			d = 0.06;
-			f = 0.0005;
+			d = 0.0065;
+			f = 0.000;
 			izone = 0;
 			ramprate = 36;  // this should leave the ramp rate uncapped.
 			profile = 1;
@@ -133,11 +133,11 @@ public class Elevator extends Subsystem {
 
 		public void upElev() {
 			servoHereFlag = false;
+			cANTalonElev.ClearIaccum();
 			cANTalonElev.setProfile(0);
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Speed);
 			cANTalonElev.set(UP_SPEED);
 			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-			cANTalonElev.ClearIaccum();
 
 		}
 
@@ -145,7 +145,7 @@ public class Elevator extends Subsystem {
 		public void servoHere(){
 			if (!servoHereFlag){ // first time through, so set flag and get the current position
 				servoHereFlag = true;
-				servoAtThisPosition = cANTalonElev.getPosition()+16;
+				servoAtThisPosition = cANTalonElev.getPosition();
 				cANTalonElev.setProfile(1);
 
 			}
@@ -190,6 +190,8 @@ public class Elevator extends Subsystem {
 	
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new ElevatorCommand());
+
     }
     public void showCanTalonStatus() {
 
