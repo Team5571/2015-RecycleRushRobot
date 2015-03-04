@@ -34,8 +34,8 @@ public class Elevator extends Subsystem {
     // here. Call these from CommandsS.
 	 double axis;
 		static double MAX_ELEV_CURRENT = 30.0;  // limit current to 3A  motor is rated at 36.91W 
-		static double DOWN_SPEED = -400;  // position change per 10 ms
-		static double UP_SPEED = +400;  // position change per 10 ms
+		static double DOWN_SPEED = -200;  // position change per 10 ms
+		static double UP_SPEED = +200;  // position change per 10 ms
 		double p;
 		double i;;
 		double d;
@@ -51,12 +51,12 @@ public class Elevator extends Subsystem {
 		public void initCanPID() {
 
 			// Set PID values for Velocity and Position Mode here in profile 0
-			p = 1;
-			i = .005;
-			d = 0.05;
-			f = 10;
-			izone = 0;
-			ramprate = 144;  // this should leave the ramp rate uncapped.
+			p = 0.5;
+			i = 0;
+			d = 0.0;
+			f = 60;
+			izone = 100;
+			ramprate = 12;  // this should leave the ramp rate uncapped.
 			profile = 0;
 			cANTalonElev.setPID(p, i, d, f, izone, ramprate, profile);
 
@@ -66,7 +66,7 @@ public class Elevator extends Subsystem {
 			d = 0.0065;
 			f = 0.000;
 			izone = 0;
-			ramprate = 36;  // this should leave the ramp rate uncapped.
+			ramprate = 0;  // this should leave the ramp rate uncapped.
 			profile = 1;
 			cANTalonElev.setPID(p, i, d, f, izone, ramprate, profile);
 
@@ -86,6 +86,7 @@ public class Elevator extends Subsystem {
 		// Change to closed loop control mode and hold the current position
 		public void positionMode() {
 			servoHereFlag = false;
+			cANTalonElev.ClearIaccum();
 			cANTalonElev.setProfile(0);
 			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
 			cANTalonElev.set(cANTalonElev.getPosition());
@@ -146,17 +147,18 @@ public class Elevator extends Subsystem {
 			if (!servoHereFlag){ // first time through, so set flag and get the current position
 				servoHereFlag = true;
 				servoAtThisPosition = cANTalonElev.getPosition();
-				cANTalonElev.setProfile(1);
-
+				
 			}
 			if (!elevCurrenLimited()){
+				cANTalonElev.ClearIaccum();
+				cANTalonElev.setProfile(1);
 				cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
 				cANTalonElev.set(servoAtThisPosition);
 				SmartDashboard.putString("Elev Servo Status", "ServoActive");
 			}
 			else{
 				cANTalonElev.changeControlMode(CANTalon.ControlMode.PercentVbus);
-				//cANTalonElev.set(0);
+				cANTalonElev.set(0);
 				SmartDashboard.putString("Elev Servo Status", "CurrentLimited");
 			}
 		}
