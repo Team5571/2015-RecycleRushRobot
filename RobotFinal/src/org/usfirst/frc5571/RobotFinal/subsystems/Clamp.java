@@ -165,7 +165,7 @@ public class Clamp extends Subsystem {
 		}
 		else{
 			cANTalonClamp.changeControlMode(CANTalon.ControlMode.PercentVbus);
-			cANTalonClamp.set(.10);
+			cANTalonClamp.set(.0);
 			SmartDashboard.putString("Clamp Servo Status", "CurrentLimited");
 		}
 		

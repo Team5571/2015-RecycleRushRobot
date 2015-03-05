@@ -37,14 +37,14 @@ public class  ElevatorCommand extends Command {
     protected void initialize() {
 		elevController.initCanPID();
 		//elevController.initElevLimits();
-		SmartDashboard.putString("Elev MODE:", "Initialized");
+		SmartDashboard.putString("Elevatorlev MODE:", "Initialized");
 		position_held = false;
 		elevController.showCanTalonStatus();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.A_Button) { // close clamp with current limited protection
+    	if (Robot.oi.Y_Button) { // close clamp with current limited protection
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
 			// elevController.positionMode();
@@ -53,24 +53,24 @@ public class  ElevatorCommand extends Command {
 			// Close Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.upElev();
-				SmartDashboard.putString("Elevator MODE:", "Closing");
+				SmartDashboard.putString("Elevator MODE:", "UP");
 			} else {
 				elevController.servoHere();
-				SmartDashboard.putString("Elevator MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
+				SmartDashboard.putString("Elevator MODE:", "UP CURRENT LIMIT EXCEEDED");
 			}
 		}
 
-		else if (Robot.oi.B_Button) { // open clamp with current limited
+		else if (Robot.oi.X_Button) { // open clamp with current limited
 										// protection
 			// open Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.downElev();
-				SmartDashboard.putString("Elevator MODE:", "Opening");
+				SmartDashboard.putString("Elevator MODE:", "DOWN");
 				;
 			} else { // current limit exceeded
 
 				elevController.servoHere();
-				SmartDashboard.putString("Elevator MODE:", "OPEN CURRENT LIMIT EXCEEDED");
+				SmartDashboard.putString("Elevator MODE:", "DOWN CURRENT LIMIT EXCEEDED");
 			}
 
 		}
@@ -88,6 +88,7 @@ public class  ElevatorCommand extends Command {
 //		}
 
 		else {
+			SmartDashboard.putString("Elevator MODE:", "HOLD POSITION");
 			elevController.servoHere();
 		}
 		// Display status on every execute call
@@ -100,7 +101,7 @@ public class  ElevatorCommand extends Command {
         return false;
         
     }
-
+ 
     // Called once after isFinished returns true
     protected void end() {
     }

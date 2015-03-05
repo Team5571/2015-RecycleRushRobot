@@ -51,7 +51,7 @@ public class  ClampCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		
-		if (Robot.oi.Bumper_R) { // close clamp with current limited protection
+		if (Robot.oi.B_Button) { // close clamp with current limited protection
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
 			// clampController.positionMode();
@@ -67,7 +67,7 @@ public class  ClampCommand extends Command {
 			}
 		}
 
-		else if (Robot.oi.Bumper_L) { // open clamp with current limited
+		else if (Robot.oi.A_Button) { // open clamp with current limited
 										// protection
 			// open Clamp
 			if (!clampController.clampCuurenLimited()) {
