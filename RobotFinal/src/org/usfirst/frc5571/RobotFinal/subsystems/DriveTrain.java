@@ -41,13 +41,13 @@ public class DriveTrain extends Subsystem {
     }
     
 	public void mecanumDrive_Polar() {
-	    double triggerTwist = (Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3);  
-	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() ), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
+	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * .50);  
+	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * .50), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 
     
 	  public double correctDeadSpot(double value) {
-	    	double deadZone = 0.20; 					//This sets a deadzone that i have seen works for Xbox controllers online
+	    	double deadZone = 0.10; 					//This sets a deadzone that i have seen works for Xbox controllers online
 	        if (Math.abs(value) < deadZone ) 			//Checks value pulled from the double inside the methode against the deadzone.
 	                return 0; 							// if less than the deadzone, returns nothing.
 	        return value; 								//Above deadzone just applies voltage.

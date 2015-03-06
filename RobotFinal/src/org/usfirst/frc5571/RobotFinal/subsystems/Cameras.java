@@ -30,12 +30,19 @@ public class Cameras extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands
     
-    public void cameraUSB() {
+    public void clampCamera() {
     	server = CameraServer.getInstance();
     	server.setQuality(75);
     	server.startAutomaticCapture("cam0");
     	
     }
+    
+//    public void elevCamera() {
+//    	server = CameraServer.getInstance();
+//    	server.setQuality(50);
+//    	server.startAutomaticCapture("cam1");
+//    	
+//    }
 
 	
 	
@@ -50,4 +57,18 @@ public class Cameras extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 }
+
+//Unhandled exception: VisionException [com.ni.vision.VisionException: IMAQdxError: -1074360310: Camera is already in use.] at [com.ni.vision.NIVision._IMAQdxOpenCamera(Native Method),
+//                                                                                                                              com.ni.vision.NIVision.IMAQdxOpenCamera(NIVision.java:24455), 
+//                                                                                                                              edu.wpi.first.wpilibj.vision.USBCamera.openCamera(USBCamera.java:61),
+//                                                                                                                              edu.wpi.first.wpilibj.vision.USBCamera.<init>(USBCamera.java:54),
+//                                                                                                                              edu.wpi.first.wpilibj.CameraServer.startAutomaticCapture(CameraServer.java:167),
+//                                                                                                                              org.usfirst.frc5571.RobotFinal.subsystems.Cameras.clampCamera(Cameras.java:36), 
+//                                                                                                                              org.usfirst.frc5571.RobotFinal.commands.Camera.execute(Camera.java:38),
+//                                                                                                                              edu.wpi.first.wpilibj.command.Command.run(Command.java:217),
+//                                                                                                                              edu.wpi.first.wpilibj.command.Scheduler.run(Scheduler.java:215),
+//                                                                                                                              org.usfirst.frc5571.RobotFinal.Robot.teleopPeriodic(Robot.java:107),
+//                                                                                                                              edu.wpi.first.wpilibj.IterativeRobot.startCompetition(IterativeRobot.java:150),
+//                                                                                                                              edu.wpi.first.wpilibj.RobotBase.main(RobotBase.java:234)]
+//
 

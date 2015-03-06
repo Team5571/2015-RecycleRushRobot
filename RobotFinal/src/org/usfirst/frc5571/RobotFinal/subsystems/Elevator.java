@@ -33,7 +33,7 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from CommandsS.
 	 double axis;
-		static double MAX_ELEV_CURRENT = 60.0;  // limit current to 3A  motor is rated at 36.91W 
+		static double MAX_ELEV_CURRENT = 100.0;  // limit current to 3A  motor is rated at 36.91W 
 		static double DOWN_SPEED = -200;  // position change per 10 ms
 		static double UP_SPEED = +200;  // position change per 10 ms
 		double p;
