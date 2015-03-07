@@ -31,7 +31,7 @@ public class Clamp extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	double axis;
-	static double MAX_CLAMP_CURRENT = 5.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
+	static double MAX_CLAMP_CURRENT = 7.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
 	static double CLOSE_SPEED =200;  // change in encoder position  per 10 ms
 	static double OPEN_SPEED = -200;  // change in encoder position  per 10 ms
 	double p;
@@ -154,11 +154,12 @@ public class Clamp extends Subsystem {
 	public void servoHere(){
 		if (!servoHereFlag){ // first time through, so set flag and get the current position
 			servoHereFlag = true;
-			servoAtThisPosition = cANTalonClamp.getPosition()+16;
+			servoAtThisPosition = cANTalonClamp.getPosition()+32;
 			cANTalonClamp.setProfile(1);
 
 		}
 		if (!clampCuurenLimited()){
+			cANTalonClamp.ClearIaccum();
 			cANTalonClamp.changeControlMode(CANTalon.ControlMode.Position);
 			cANTalonClamp.set(servoAtThisPosition);
 			SmartDashboard.putString("Clamp Servo Status", "ServoActive");
