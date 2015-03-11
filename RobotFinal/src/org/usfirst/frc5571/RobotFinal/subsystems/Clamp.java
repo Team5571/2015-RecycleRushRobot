@@ -154,7 +154,8 @@ public class Clamp extends Subsystem {
 	public void servoHere(){
 		if (!servoHereFlag){ // first time through, so set flag and get the current position
 			servoHereFlag = true;
-			servoAtThisPosition = cANTalonClamp.getPosition()+16;
+			servoAtThisPosition = cANTalonClamp.getPosition()+0;
+			cANTalonClamp.ClearIaccum();
 			cANTalonClamp.setProfile(1);
 
 		}
