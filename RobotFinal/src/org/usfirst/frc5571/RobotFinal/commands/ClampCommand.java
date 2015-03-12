@@ -51,7 +51,7 @@ public class  ClampCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 		
-		if (Robot.oi.Y_Button) { // close clamp with current limited protection
+		if (Robot.oi.Bumper_R) { // close clamp with current limited protection
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
 			// clampController.positionMode();
@@ -67,7 +67,7 @@ public class  ClampCommand extends Command {
 			}
 		}
 
-		else if (Robot.oi.X_Button) { // open clamp with current limited
+		else if (Robot.oi.Bumper_L) { // open clamp with current limited
 										// protection
 			// open Clamp
 			if (!clampController.clampCuurenLimited()) {
@@ -82,23 +82,24 @@ public class  ClampCommand extends Command {
 
 		}
 //FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
-//		else if (Robot.oi.A_Button) {
-//			clampController.positionMoveByCount(1000);
-//			SmartDashboard.putString("MODE:", "B - Move+1000");
-//
-//		}
+		else if (Robot.oi.A_Button) {
+			clampController.positionMoveByCount(250);
+ 	    	SmartDashboard.putString("Clamp MODE:", "B - Move +250");
+
+	}
 
 		//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
-		//		else if (Robot.oi.B_Button){ 
-//			clampController.positionMoveByCount(-1000);
-//			SmartDashboard.putString("MODE:", "B - Move-1000");
-//		}
+				else if (Robot.oi.B_Button){ 
+			clampController.positionMoveByCount(-250);
+			SmartDashboard.putString("Clamp MODE:", "Move -250");
+		}
 
 		else {
 			clampController.servoHere();
 		}
 		// Display status on every execute call
 		clampController.showCanTalonStatus();
+		clampController.clampLight_test();
    }
 
 

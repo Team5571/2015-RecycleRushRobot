@@ -44,7 +44,8 @@ public class  ElevatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if ((Robot.oi.right_yAxis * .5) <= -0.10) { // close clamp with current limited protection
+//    	if (((Robot.oi.POV) == 315) || ((Robot.oi.POV) == 0) || ((Robot.oi.POV) == 45) ){ // close clamp with current limited protection
+    	if (Robot.oi.right_yAxis <= -0.10) {
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
 			// elevController.positionMode();
@@ -60,8 +61,9 @@ public class  ElevatorCommand extends Command {
 			}
 		}
 
-		else if ((Robot.oi.right_yAxis * .5) >= 0.10) { // open clamp with current limited
-										// protection
+		else 
+			//if (((Robot.oi.POV) == 180) || ((Robot.oi.POV) == 135) || ((Robot.oi.POV) == 225) ) { // open clamp with current limited
+			if (Robot.oi.right_yAxis >= 0.10) {						// protection
 			// open Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.downElev();
