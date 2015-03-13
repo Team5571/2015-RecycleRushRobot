@@ -184,16 +184,16 @@ public class Elevator extends Subsystem {
 			return(cANTalonElev.getOutputCurrent() > MAX_ELEV_CURRENT);
 		}
 		
-		public void elevCalibrate() {
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
-			cANTalonElev.set((cANTalonElev.getPosition()+2000));
-			SmartDashboard.putString("Elev MODE", "Calibrating");
-			cANTalonElev.ClearIaccum();
-			if cANTalonElev.
-			
-		}
+//		public void elevCalibrate() {
+//			servoHereFlag = false;
+//			cANTalonElev.setProfile(0);
+//			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
+//			cANTalonElev.set((cANTalonElev.getPosition()+2000));
+//			SmartDashboard.putString("Elev MODE", "Calibrating");
+//			cANTalonElev.ClearIaccum();
+//			if cANTalonElev.
+//			
+//		}
 
 
     public void initDefaultCommand() {

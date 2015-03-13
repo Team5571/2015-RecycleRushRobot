@@ -58,6 +58,7 @@ public class  ClampCommand extends Command {
 			// SmartDashboard.putString("MODE:", "Position");
 			// clampController.showCanTalonStatus();
 			// Close Clamp
+			//RobotMap.clampLight.set(true);
 			if (!clampController.clampCuurenLimited()) {
 				clampController.closeClamp();
 				SmartDashboard.putString("Clamp MODE:", "Closing");
@@ -82,11 +83,12 @@ public class  ClampCommand extends Command {
 
 		}
 //FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
-//		else if (Robot.oi.A_Button) {
-//			clampController.positionMoveByCount(1000);
-//			SmartDashboard.putString("MODE:", "B - Move+1000");
-//
-//		}
+		else if (Robot.oi.A_Button) {
+			//clampController.positionMoveByCount(1000);
+			//SmartDashboard.putString("MODE:", "B - Move+1000");
+			clampController.clampLight_test();
+
+		}
 
 		//FOR TUNING ONLY DISCONNECT LINKAGE BEFORE USING
 		//		else if (Robot.oi.B_Button){ 
@@ -96,9 +98,12 @@ public class  ClampCommand extends Command {
 
 		else {
 			clampController.servoHere();
+			//RobotMap.clampLight.set(false);
 		}
 		// Display status on every execute call
 		clampController.showCanTalonStatus();
+		clampController.clampLight_test();
+		
    }
 
 
