@@ -61,6 +61,7 @@ public class  ClampCommand extends Command {
 			//RobotMap.clampLight.set(true);
 			if (!clampController.clampCuurenLimited()) {
 				clampController.closeClamp();
+				clampController.clampCurrent_Light();
 				SmartDashboard.putString("Clamp MODE:", "Closing");
 			} else {
 				clampController.servoHere();
@@ -73,6 +74,7 @@ public class  ClampCommand extends Command {
 			// open Clamp
 			if (!clampController.clampCuurenLimited()) {
 				clampController.openClamp();
+				clampController.clampCurrent_Light();
 				SmartDashboard.putString("Clamp MODE:", "Opening");
 				;
 			} else { // current limit exceeded
@@ -86,7 +88,6 @@ public class  ClampCommand extends Command {
 		else if (Robot.oi.A_Button) {
 			//clampController.positionMoveByCount(1000);
 			//SmartDashboard.putString("MODE:", "B - Move+1000");
-			clampController.clampLight_test();
 
 		}
 
