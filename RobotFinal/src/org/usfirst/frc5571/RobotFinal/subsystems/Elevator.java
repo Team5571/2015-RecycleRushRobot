@@ -34,7 +34,7 @@ public class Elevator extends Subsystem {
     // here. Call these from CommandsS.
 	 double axis;
 		static double MAX_ELEV_CURRENT = 100.0;  // limit current to 3A  motor is rated at 36.91W 
-		static double DOWN_SPEED = -200;  // position change per 10 ms
+		static double DOWN_SPEED = -100;  // position change per 10 ms
 		static double UP_SPEED = 200;  // position change per 10 ms
 		double p;
 		double i;;
@@ -51,12 +51,12 @@ public class Elevator extends Subsystem {
 		public void initCanPID() {
 
 			// Set PID values for Velocity and Position Mode here in profile 0
-			p = 0.5;
+			p = 1;
 			i = 0;
 			d = 0.0;
 			f = 60;
 			izone = 100;
-			ramprate = 12;  // this should leave the ramp rate uncapped.
+			ramprate = 0;  // this should leave the ramp rate uncapped.
 			profile = 0;
 			cANTalonElev.setPID(p, i, d, f, izone, ramprate, profile);
 
