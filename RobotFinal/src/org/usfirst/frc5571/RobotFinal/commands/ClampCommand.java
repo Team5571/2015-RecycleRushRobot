@@ -60,6 +60,7 @@ public class  ClampCommand extends Command {
 			// Close Clamp
 			if (!clampController.clampCuurenLimited()) {
 				clampController.closeClamp();
+				clampController.clampCurrent_Light();
 				SmartDashboard.putString("Clamp MODE:", "Closing");
 			} else {
 				clampController.servoHere();
@@ -72,6 +73,7 @@ public class  ClampCommand extends Command {
 			// open Clamp
 			if (!clampController.clampCuurenLimited()) {
 				clampController.openClamp();
+				clampController.clampCurrent_Light();
 				SmartDashboard.putString("Clamp MODE:", "Opening");
 				;
 			} else { // current limit exceeded
