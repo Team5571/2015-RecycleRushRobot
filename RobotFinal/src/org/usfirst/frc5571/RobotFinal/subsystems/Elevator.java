@@ -56,7 +56,7 @@ public class Elevator extends Subsystem {
 			d = 0.0;
 			f = 60;
 			izone = 100;
-			ramprate = 0;  // this should leave the ramp rate uncapped.
+			ramprate = 120;  // this should leave the ramp rate uncapped.
 			profile = 0;
 			cANTalonElev.setPID(p, i, d, f, izone, ramprate, profile);
 
