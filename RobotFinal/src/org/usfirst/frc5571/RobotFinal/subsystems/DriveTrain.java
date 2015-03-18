@@ -38,8 +38,8 @@ public class DriveTrain extends Subsystem {
     // Scaling factors to adjust drive sensitivity. Start button used to selct fast drive
     static double FAST_DRIVE_MAGNITUDE_SCALE = 0.6;
     static double FAST_DRIVE_TWIST_SCALE = 0.5;
-    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.3;
-    static double FINE_DRIVE_TWIST_SCALE = 0.25;
+    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
+    static double FINE_DRIVE_TWIST_SCALE = 0.3;
 
     
    
