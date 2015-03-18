@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem {
     }
     
 	public void mecanumDrive_Polar() {
-	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * .60);  
+	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * .75);  
 	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * .50), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 

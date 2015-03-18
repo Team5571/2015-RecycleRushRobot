@@ -33,7 +33,7 @@ public class Clamp extends Subsystem {
 	double axis;
 	static double MAX_CLAMP_CURRENT = 25.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
 	static double CLOSE_SPEED = 600;  // change in encoder position  per 10 ms
-	static double OPEN_SPEED = -200;  // change in encoder position  per 10 ms
+	static double OPEN_SPEED = -400;  // change in encoder position  per 10 ms
 	double p;
 	double i;;
 	double d;
