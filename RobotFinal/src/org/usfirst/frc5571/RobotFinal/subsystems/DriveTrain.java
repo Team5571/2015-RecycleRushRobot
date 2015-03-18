@@ -35,14 +35,33 @@ public class DriveTrain extends Subsystem {
     CANTalon cANTalonFrontRight = RobotMap.driveTrainCANTalonFrontRight;
     RobotDrive robotDrive41 = RobotMap.driveTrainRobotDrive41;
     
+    // Scaling factors to adjust drive sensitivity. Start button used to selct fast drive
+    static double FAST_DRIVE_MAGNITUDE_SCALE = 0.6;
+    static double FAST_DRIVE_TWIST_SCALE = 0.5;
+    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.3;
+    static double FINE_DRIVE_TWIST_SCALE = 0.25;
+
+    
+   
     public void initInvert() {
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     }
     
 	public void mecanumDrive_Polar() {
-	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * .60);  
-	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * .50), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
+		double magnitudeScaleFactor;
+		double twistScaleFactor;
+		if (Robot.oi.Start_Button){
+			magnitudeScaleFactor = FAST_DRIVE_MAGNITUDE_SCALE;
+			twistScaleFactor = FAST_DRIVE_TWIST_SCALE;
+		}
+		else
+		{
+			magnitudeScaleFactor = FINE_DRIVE_MAGNITUDE_SCALE;
+			twistScaleFactor = FINE_DRIVE_TWIST_SCALE;
+		}
+	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * magnitudeScaleFactor);  
+	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * twistScaleFactor), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 
     
