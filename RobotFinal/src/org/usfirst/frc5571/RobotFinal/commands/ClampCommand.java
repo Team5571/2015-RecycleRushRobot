@@ -70,7 +70,7 @@ public class  ClampCommand extends Command {
 		else if (Robot.oi.X_Button) { // open clamp with current limited
 										// protection
 			// open Clamp
-			if (!clampController.clampCuurenLimited()) {
+				if (!clampController.clampCuurenLimited()) {
 				clampController.openClamp();
 				SmartDashboard.putString("Clamp MODE:", "Opening");
 				;
