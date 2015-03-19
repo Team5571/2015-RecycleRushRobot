@@ -71,7 +71,13 @@ public class  ClampCommand extends Command {
 			// Close Clamp
 			if (!clampController.clampCuurenLimited()) {
 				clampController.closeClamp();
+				if (gripperState == GripperState.CLOSED){
+					clampController.turnOnGripperCLosedLight();
+				}
+				else{
 				gripperState = GripperState.CLOSING;
+				clampController.turnOffGripperCLosedLight();
+				}
 				SmartDashboard.putString("Clamp MODE:", "Closing");
 			} else {
 				clampController.servoHere();
@@ -87,7 +93,7 @@ public class  ClampCommand extends Command {
 				clampController.openClamp();
 				SmartDashboard.putString("Clamp MODE:", "Opening");
 				gripperState = GripperState.OPEN;
-				;
+				clampController.turnOffGripperCLosedLight();
 			} else { // current limit exceeded
 
 				clampController.servoHere();
@@ -110,6 +116,13 @@ public class  ClampCommand extends Command {
 
 		else {
 			clampController.servoHere();
+			
+			// Check to see if we just closed
+			if ((RobotMap.clampCANTalonClamp.getSpeed() < 10 && gripperState == GripperState.CLOSING)){
+				gripperState = GripperState.CLOSED;
+			}
+			
+			// Now turn light on or off
 			if (gripperState == GripperState.CLOSED){
 				clampController.turnOnGripperCLosedLight();
 			}
