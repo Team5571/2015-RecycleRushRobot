@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     CameraServer server;
-    USBCamera usbCamera;
+    //USBCamera usbCamera;
 
 
     public static OI oi;
@@ -54,19 +54,19 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     RobotMap.init();
     
-    USBCamera  usbCamera = new USBCamera("cam0");
-    usbCamera.openCamera();
-    usbCamera.setFPS(30);
-    //usbCamera.setSize(1280, 720);   Try this if we get lower resolution working
-    usbCamera.setSize(640, 480);
-    usbCamera.updateSettings();
-    usbCamera.startCapture();
+//    USBCamera  usbCamera = new USBCamera("cam0");
+//    usbCamera.openCamera();
+//    usbCamera.setFPS(30);
+//    usbCamera.setSize(1280, 720);   Try this if we get lower resolution working
+//    usbCamera.setSize(640, 480);
+//    usbCamera.updateSettings();
+//    usbCamera.startCapture();
     
     // Camera Server Code for testing
-    //server = CameraServer.getInstance();
-    //server.setQuality(50);
+    server = CameraServer.getInstance();
+    server.setQuality(50);
     //the camera name (ex "cam0") can be found through the roborio web interface
-    //server.startAutomaticCapture("cam0");
+    server.startAutomaticCapture("cam0");
     
     
     SmartDashboard.putData(Scheduler.getInstance());
