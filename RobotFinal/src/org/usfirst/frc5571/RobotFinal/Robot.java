@@ -16,10 +16,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc5571.RobotFinal.Robot;
 import org.usfirst.frc5571.RobotFinal.commands.*;
 import org.usfirst.frc5571.RobotFinal.subsystems.*;
+
 import edu.wpi.first.wpilibj.CameraServer;
 
 /**
@@ -33,6 +35,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     CameraServer server;
+    USBCamera usbCamera;
 
 
     public static OI oi;
@@ -51,11 +54,19 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     RobotMap.init();
     
+    USBCamera  usbCamera = new USBCamera("cam0");
+    usbCamera.openCamera();
+    usbCamera.setFPS(30);
+    //usbCamera.setSize(1280, 720);   Try this if we get lower resolution working
+    usbCamera.setSize(640, 480);
+    usbCamera.updateSettings();
+    usbCamera.startCapture();
+    
     // Camera Server Code for testing
-    server = CameraServer.getInstance();
-    server.setQuality(50);
+    //server = CameraServer.getInstance();
+    //server.setQuality(50);
     //the camera name (ex "cam0") can be found through the roborio web interface
-    server.startAutomaticCapture("cam0");
+    //server.startAutomaticCapture("cam0");
     
     
     SmartDashboard.putData(Scheduler.getInstance());
