@@ -106,7 +106,7 @@ public class OI {
 		left_trigger = xboxController.getRawAxis(3);
 		right_xAxis = xboxController.getRawAxis(4);
 		right_yAxis = xboxController.getRawAxis(5);
-		DPAD_LR = xboxController.getRawAxis(6);
+		//DPAD_LR = xboxController.getRawAxis(6);
 
 		A_Button = xboxController.getRawButton(1);
 		B_Button = xboxController.getRawButton(2);
