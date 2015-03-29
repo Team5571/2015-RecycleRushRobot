@@ -40,12 +40,25 @@ public class DriveTrain extends Subsystem {
     static double FAST_DRIVE_TWIST_SCALE = 0.5;
     static double FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
     static double FINE_DRIVE_TWIST_SCALE = 0.3;
+    static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
+    static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
 
     
    
     public void initInvert() {
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+    }
+    
+    public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
+		robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1*direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
+
+		
+		
+//    	while (numberOfCycles < 0){
+//    		robotDrive41.mecanumDrive_Polar(magnitude, direction, rotation);
+//    		--numberOfCycles;
+//    	}
     }
     
 	public void mecanumDrive_Polar() {
