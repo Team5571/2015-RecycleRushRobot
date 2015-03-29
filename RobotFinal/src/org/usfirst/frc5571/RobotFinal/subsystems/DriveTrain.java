@@ -50,16 +50,7 @@ public class DriveTrain extends Subsystem {
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     }
     
-    public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
-		robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1*direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
-
-		
-		
-//    	while (numberOfCycles < 0){
-//    		robotDrive41.mecanumDrive_Polar(magnitude, direction, rotation);
-//    		--numberOfCycles;
-//    	}
-    }
+   
     
 	public void mecanumDrive_Polar() {
 		double magnitudeScaleFactor;
@@ -77,6 +68,9 @@ public class DriveTrain extends Subsystem {
 	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * twistScaleFactor), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 
+	 public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
+			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1*direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
+	    }
     
 	  public double correctDeadSpot(double value) {
 	    	double deadZone = 0.10; 					//This sets a deadzone that i have seen works for Xbox controllers online
