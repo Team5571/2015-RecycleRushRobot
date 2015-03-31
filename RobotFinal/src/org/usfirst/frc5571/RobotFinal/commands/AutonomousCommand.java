@@ -44,10 +44,17 @@ public class  AutonomousCommand extends CommandGroup {
 	static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
 	static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
 	
-	static double DRIVE_TO_AUTO	= 1.2;	/* 1.2 seconds to go from start posision to auto zone */
+	static double DRIVE_TO_AUTO	= .5;	/* 1.2 seconds to go from start posision to auto zone */
 	static Double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
 
 	public AutonomousCommand() {
+		
+//		Unhandled exception: java.lang.NullPointerException at [org.usfirst.frc5571.RobotFinal.commands.RotateLeft90Command.isFinished(RotateLeft90Command.java:44),
+//		                                                        edu.wpi.first.wpilibj.command.Command.run(Command.java:218), edu.wpi.first.wpilibj.command.CommandGroup._execute(CommandGroup.java:221), 
+//		                                                        edu.wpi.first.wpilibj.command.Command.run(Command.java:216), edu.wpi.first.wpilibj.command.Scheduler.run(Scheduler.java:215), 
+//		                                                        org.usfirst.frc5571.RobotFinal.Robot.autonomousPeriodic(Robot.java:92),
+//		                                                        edu.wpi.first.wpilibj.IterativeRobot.startCompetition(IterativeRobot.java:135),
+//		                                                        edu.wpi.first.wpilibj.RobotBase.main(RobotBase.java:234)]
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 
