@@ -24,6 +24,7 @@ public class DriveForwardCommand extends Command {
 		requires(Robot.driveTrain);
 		Timer timer = new Timer();
 		timer.reset();
+		driveDuration = duration;
 	}
 
 	// Called just before this Command runs the first time
