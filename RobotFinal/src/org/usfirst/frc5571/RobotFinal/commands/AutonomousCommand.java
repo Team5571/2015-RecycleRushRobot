@@ -45,7 +45,7 @@ public class  AutonomousCommand extends CommandGroup {
 	static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
 	
 	static double DRIVE_TO_AUTO	= 1.2;	/* 1.2 seconds to go from start posision to auto zone */
-	static Double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
+	static double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
 
 	public AutonomousCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -61,7 +61,8 @@ public class  AutonomousCommand extends CommandGroup {
 		 * The commands run for as long as the duration specified in the call to the command
 		 */
 		
-		addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
+		//addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
+		addSequential(new CloseGripper(2.5));
 		addSequential(new DriveForwardCommand(DRIVE_TO_AUTO));
 		autoDone = true;
 	}
