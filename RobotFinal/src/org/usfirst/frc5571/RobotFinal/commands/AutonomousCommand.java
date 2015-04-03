@@ -43,14 +43,10 @@ public class  AutonomousCommand extends CommandGroup {
 	static double AUTO_FAST_DRIVE_TWIST_SCALE = 0.5;
 	static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
 	static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
-	
-<<<<<<< HEAD
-	static double DRIVE_TO_AUTO	= .5;	/* 1.2 seconds to go from start posision to auto zone */
-	static Double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
-=======
+
+
 	static double DRIVE_TO_AUTO	= 1.2;	/* 1.2 seconds to go from start posision to auto zone */
 	static double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
->>>>>>> origin/bobbyautinomous
 
 	public AutonomousCommand() {
 		
