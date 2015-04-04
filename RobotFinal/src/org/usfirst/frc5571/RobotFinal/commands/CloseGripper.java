@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class CloseGripper extends Command {
 	
 	private Timer timer;
-	double closeTime;
+	public double closeTime;
 
     public CloseGripper() {
         // Use requires() here to declare subsystem dependencies
@@ -25,18 +25,19 @@ public class CloseGripper extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.clamp);
+    	
     	Timer timer = new Timer();
 		timer.reset();
-    	closeTime = duration;
+    	 closeTime = duration;
     }
     
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	requires(Robot.clamp);
-		Timer timer = new Timer();
-		timer.reset();
+    	//requires(Robot.clamp);
+		//Timer timer = new Timer();
+		//timer.reset();
 		
 		// initialize PID profiles for gripper
 		Robot.clamp.initCanPID();

@@ -35,7 +35,7 @@ import org.usfirst.frc5571.RobotFinal.RobotMap;
 
 public class  AutonomousCommand extends CommandGroup {
 	// Flag to end the command
-	Boolean autoDone = false;
+	public Boolean autoDone = false;
 	//Boolean autoDriveCommandInProgress = false;
 
 	// Scaling factors to adjust drive sensitivity during autonomous to simulate Joystick deflections. 
@@ -45,7 +45,7 @@ public class  AutonomousCommand extends CommandGroup {
 	static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
 
 
-	static double DRIVE_TO_AUTO	= 1.2;	/* 1.2 seconds to go from start posision to auto zone */
+	static double DRIVE_TO_AUTO	= 10.0;	/* 1.2 seconds to go from start posision to auto zone */
 	static double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
 
 	public AutonomousCommand() {
@@ -70,31 +70,10 @@ public class  AutonomousCommand extends CommandGroup {
 		 */
 		
 		//addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
-		addSequential(new CloseGripper(2.5));
+		//addSequential(new CloseGripper(2.5));
 		addSequential(new DriveForwardCommand(DRIVE_TO_AUTO));
-		autoDone = true;
-	}
-
-	// Called just before this Command runs the first time
-	protected void initialize() {
-		Robot.driveTrain.initInvert(); 
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-	}
-
-	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {
-		return autoDone;
-	}
-
-	// Called once after isFinished returns true
-	protected void end() {
-	}
-
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted() {
+		//autoDone = true;
 	}
 }
+
+	

@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveForwardCommand extends Command {
-	private Timer timer;
+	Timer timer;
 	double driveDuration;
 
 	public DriveForwardCommand() {
@@ -22,13 +22,15 @@ public class DriveForwardCommand extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.driveTrain);
-		Timer timer = new Timer();
-		timer.reset();
+		timer = new Timer();
 		driveDuration = duration;
+		
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		timer.reset();
+		timer.start();
 		Robot.driveTrain.mecanumDriveAutoFine(1, 0, 0);
 	}
 
@@ -38,21 +40,18 @@ public class DriveForwardCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (timer.get() < driveDuration){
-			return false;
-		}
-		else{ /* command is finished so stop the drive train */
-			Robot.driveTrain.mecanumDriveAutoFine(0, 0, 0);
-			return true;
-		}
+		return (timer.get() > driveDuration);
 	}
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.driveTrain.mecanumDriveAutoFine(0, 0, 0);
+		timer.stop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		this.end();
 	}
 }
 
