@@ -31,7 +31,7 @@ public class Clamp extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	double axis;
-	static double MAX_CLAMP_CURRENT = 50.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
+	static double MAX_CLAMP_CURRENT = 80.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
 	static double CLOSE_SPEED = 600;  // change in encoder position  per 10 ms
 	static double OPEN_SPEED = -400;  // change in encoder position  per 10 ms
 	double p;
@@ -99,7 +99,8 @@ public class Clamp extends Subsystem {
 
 	// Change to closed loop control mode and hold the current position
 	public void positionMode() {
-		servoHereFlag = false;
+		//servoHereFlag = false;
+		cANTalonClamp.setPosition(0);
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
 		cANTalonClamp.changeControlMode(CANTalon.ControlMode.Position);
@@ -154,12 +155,13 @@ public class Clamp extends Subsystem {
 	public void servoHere(){
 		if (!servoHereFlag){ // first time through, so set flag and get the current position
 			servoHereFlag = true;
-			servoAtThisPosition = cANTalonClamp.getPosition()+50;
-			//cANTalonClamp.ClearIaccum();
-			cANTalonClamp.setProfile(1);
-
+			cANTalonClamp.changeControlMode(CANTalon.ControlMode.Position);
+			//cANTalonClamp.setPosition(0);
+			servoAtThisPosition = cANTalonClamp.getPosition()+0;
+			cANTalonClamp.ClearIaccum();
+		
 		}
-		if (!clampCuurenLimited()){
+		else if (!clampCuurenLimited()){
 			cANTalonClamp.changeControlMode(CANTalon.ControlMode.Position);
 			cANTalonClamp.ClearIaccum();
 			cANTalonClamp.set(servoAtThisPosition);
@@ -167,7 +169,7 @@ public class Clamp extends Subsystem {
 		}
 		else{
 			cANTalonClamp.changeControlMode(CANTalon.ControlMode.PercentVbus);
-			cANTalonClamp.set(.0);
+			cANTalonClamp.set(0);
 			SmartDashboard.putString("Clamp Servo Status", "CurrentLimited");
 		}
 		
