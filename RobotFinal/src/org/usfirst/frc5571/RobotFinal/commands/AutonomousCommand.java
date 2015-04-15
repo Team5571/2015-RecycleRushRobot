@@ -69,8 +69,8 @@ public class  AutonomousCommand extends CommandGroup {
 		 * The commands run for as long as the duration specified in the call to the command
 		 */
 		
-		//addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
-		//addSequential(new CloseGripper(2.5));
+		addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
+		addSequential(new CloseGripper(2.5));
 		addSequential(new DriveForwardCommand(DRIVE_TO_AUTO));
 		//autoDone = true;
 	}
