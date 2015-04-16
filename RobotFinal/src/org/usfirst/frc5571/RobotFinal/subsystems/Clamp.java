@@ -19,6 +19,7 @@ import org.usfirst.frc5571.RobotFinal.commands.*;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.can.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -184,7 +185,14 @@ public class Clamp extends Subsystem {
 
 	}
 
+	public boolean openLimitReached(){
+		return (cANTalonClamp.isRevLimitSwitchClosed());
+	}
 
+	public boolean closedLimitReached(){
+		return (cANTalonClamp.isFwdLimitSwitchClosed());
+	}
+	
 //	public void voltageMode() {
 //		servoHereFlag = false;
 //		//cANTalonClamp.setProfile(0);

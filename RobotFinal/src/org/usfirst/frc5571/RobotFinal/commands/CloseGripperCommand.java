@@ -9,17 +9,17 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class CloseGripper extends Command {
+public class CloseGripperCommand extends Command {
 	private Timer timer;
 	double closeTime;
 
-	public CloseGripper() {
+	public CloseGripperCommand() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.clamp);
 	}
 
-	public CloseGripper(double duration) {
+	public CloseGripperCommand(double duration) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.clamp);
@@ -46,6 +46,9 @@ public class CloseGripper extends Command {
 		} else {
 			Robot.clamp.servoHere();
 			SmartDashboard.putString("Clamp MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
+		}
+		if (Robot.clamp.closedLimitReached()){
+			this.end();
 		}
 	}
 

@@ -33,7 +33,7 @@ import org.usfirst.frc5571.RobotFinal.RobotMap;
 
 
 
-public class  AutonomousCommand extends CommandGroup {
+public class  AutonomousDefendContainers extends CommandGroup {
 	// Flag to end the command
 	public Boolean autoDone = false;
 	//Boolean autoDriveCommandInProgress = false;
@@ -48,7 +48,7 @@ public class  AutonomousCommand extends CommandGroup {
 	static double DRIVE_TO_AUTO	= 10.0;	/* 1.2 seconds to go from start posision to auto zone */
 	static double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
 
-	public AutonomousCommand() {
+	public AutonomousDefendContainers() {
 		
 //		Unhandled exception: java.lang.NullPointerException at [org.usfirst.frc5571.RobotFinal.commands.RotateLeft90Command.isFinished(RotateLeft90Command.java:44),
 //		                                                        edu.wpi.first.wpilibj.command.Command.run(Command.java:218), edu.wpi.first.wpilibj.command.CommandGroup._execute(CommandGroup.java:221), 

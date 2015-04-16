@@ -36,12 +36,12 @@ public class DriveTrain extends Subsystem {
     RobotDrive robotDrive41 = RobotMap.driveTrainRobotDrive41;
     
     // Scaling factors to adjust drive sensitivity. Start button used to selct fast drive
-    static double FAST_DRIVE_MAGNITUDE_SCALE = 0.6;
-    static double FAST_DRIVE_TWIST_SCALE = 0.5;
-    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
-    static double FINE_DRIVE_TWIST_SCALE = 0.3;
-    static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = 0.4;
-    static double AUTO_FINE_DRIVE_TWIST_SCALE = 0.3;
+    static double FAST_DRIVE_MAGNITUDE_SCALE = 0.5;
+    static double FAST_DRIVE_TWIST_SCALE = 0.6;
+    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.3;
+    static double FINE_DRIVE_TWIST_SCALE = 0.4;
+    static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = FINE_DRIVE_MAGNITUDE_SCALE;
+    static double AUTO_FINE_DRIVE_TWIST_SCALE =FINE_DRIVE_TWIST_SCALE;
 
     
    
@@ -64,12 +64,12 @@ public class DriveTrain extends Subsystem {
 			magnitudeScaleFactor = FINE_DRIVE_MAGNITUDE_SCALE;
 			twistScaleFactor = FINE_DRIVE_TWIST_SCALE;
 		}
-	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * magnitudeScaleFactor);  
-	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * twistScaleFactor), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
+	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * twistScaleFactor);  
+	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * magnitudeScaleFactor), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 
-	 public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
-			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1*direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
+	public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
+			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1* direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
 	    }
     
 	  public double correctDeadSpot(double value) {
