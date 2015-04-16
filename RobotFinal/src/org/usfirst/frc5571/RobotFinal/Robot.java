@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        Robot.elevator.showCanTalonStatus();
     }
 
     public void teleopInit() {

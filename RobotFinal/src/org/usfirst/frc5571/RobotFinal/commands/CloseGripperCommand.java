@@ -47,14 +47,12 @@ public class CloseGripperCommand extends Command {
 			Robot.clamp.servoHere();
 			SmartDashboard.putString("Clamp MODE:", "CLOSE CURRENT LIMIT EXCEEDED");
 		}
-		if (Robot.clamp.closedLimitReached()){
-			this.end();
-		}
+	
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return (timer.get() > closeTime);
+		return ((timer.get() > closeTime) || (Robot.clamp.closedLimitReached()));
 	}
 
 
