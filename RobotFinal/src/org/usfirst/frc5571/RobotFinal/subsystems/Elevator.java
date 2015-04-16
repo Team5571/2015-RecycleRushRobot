@@ -76,7 +76,7 @@ public class Elevator extends Subsystem {
 		cANTalonElev.reverseSensor(false);
 		//Reverse = true for gripper motor
 		//Reverse = false for pulley
-		/*if (downLimitReached())*/{
+		if (!homed && cANTalonElev.isRevLimitSwitchClosed()){
 			zeroElevator();
 			homed = true;
 
@@ -213,7 +213,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void zeroElevator(){
-		cANTalonElev.setPosition(0);
+		cANTalonElev.setPosition(0);;
 	}
 
 	public void homeElevator(){

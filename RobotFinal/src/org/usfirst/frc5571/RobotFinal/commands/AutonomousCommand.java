@@ -71,12 +71,14 @@ public class  AutonomousCommand extends CommandGroup {
 		
 		//addSequential(new RotateLeft90Command(TIME_TO_ROTATE_90_DEGREES));
 		
-		addSequential(new MoveElevatorToPositionCommand(13000, 10));
-		addSequential(new CloseGripperCommand(2.5));
-		addSequential(new MoveElevatorToPositionCommand(6000, 10));
+		addSequential(new MoveElevatorToPositionCommand(24000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+		addSequential(new AutoDriveCommand(1,180,1,1.2)); /* back away and rotate */
 		addSequential(new OpenGripperCommand(1));
-		addSequential(new AutoDriveCommand(0,0,1,2.5));
-//		
+		addSequential(new AutoDriveCommand(1, 0, 0, 2));
+		
+		//addSequential(new AutoDriveCommand(0,0,1,1.45));  // Good 90 degree turn timing 
+//		//addSequential(new CloseGripperCommand(2.5));
+		//addSequential(new MoveElevatorToPositionCommand(6000, 10));
 		
 		//addSequential(new DriveForwardCommand(DRIVE_TO_AUTO));
 		//autoDone = true;

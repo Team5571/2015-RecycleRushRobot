@@ -67,7 +67,7 @@ public class MoveElevatorToPositionCommand extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.elevator.servoHere();
+		//Robot.elevator.servoHere();
 		timer.stop();
 	}
 
