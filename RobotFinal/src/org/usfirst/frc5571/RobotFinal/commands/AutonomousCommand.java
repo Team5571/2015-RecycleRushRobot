@@ -12,6 +12,7 @@ package org.usfirst.frc5571.RobotFinal.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 import org.usfirst.frc5571.RobotFinal.Robot;
 import org.usfirst.frc5571.RobotFinal.RobotMap;
@@ -81,50 +82,53 @@ public class  AutonomousCommand extends CommandGroup {
 		 * Align front of front wheel with top edge of tote parallel to step in front of left container
 		 */
 		// Pick up Left Container first then right
-		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		addParallel(new OpenGripperCommand(4));
-		addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
-		addSequential(new AutoDriveCommand(1,0,0,.25));  //Drive forward
-		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
-		addSequential(new CloseGripperCommand(4));
-		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		addSequential(new AutoDriveCommand(-3,0,0,0.25));  // drive backwards to clear totes
-		addSequential(new AutoDriveCommand(0,0,-1,1.5));  // turn left to put down
-		addSequential(new MoveElevatorToPositionCommand(10000, 10)); /* lower to set down */
-		addSequential(new OpenGripperCommand(4));
-		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		addSequential(new AutoDriveCommand(-2,0,0,1.2));  // drive backwards to wall
-		addSequential(new AutoDriveCommand(0,0,1,1.5));  // GRotate right to align with RHS container
-	
-		addSequential(new AutoDriveCommand(1,0,0,1));  // Move forward
-		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
-		addSequential(new CloseGripperCommand(4));
-		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+//		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+//		addParallel(new OpenGripperCommand(4));
+//		addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
+//		addSequential(new AutoDriveCommand(1,0,0,.25));  //Drive forward
+//		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
+//		addSequential(new CloseGripperCommand(4));
+//		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+//		addSequential(new AutoDriveCommand(-3,0,0,0.25));  // drive backwards to clear totes
+//		addSequential(new AutoDriveCommand(0,0,-1,1.5));  // turn left to put down
+//		addSequential(new MoveElevatorToPositionCommand(10000, 10)); /* lower to set down */
+//		addSequential(new OpenGripperCommand(4));
+//		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+//		addSequential(new AutoDriveCommand(-2,0,0,1.2));  // drive backwards to wall
+//		addSequential(new AutoDriveCommand(0,0,1,1.5));  // GRotate right to align with RHS container
+//	
+//		addSequential(new AutoDriveCommand(1,0,0,1));  // Move forward
+//		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
+//		addSequential(new CloseGripperCommand(4));
+//		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
 
 		/**********************************************************************
 		
 			
-		/************************** Grab Both Containers Left then right ****************/
+		/************************** Grab Both Containers Left then right  but dont put container near step****************/
 		/* This takes 15 seconds to complete!
 		 * Align front of front wheel with top edge of tote parallel to step in front of left container
 		 */
-		// Pick up Left Container first then right
-		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+		// Pick up Left Container first then right but puts it down out of way of step
+		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* raise to clear totes in landfill 16000 picks up*/
 		addParallel(new OpenGripperCommand(4));
+		addParallel(new MoveElevatorToPositionCommand(32000, 10));
 		addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
 		addSequential(new AutoDriveCommand(1,0,0,.25));  //Drive forward
 		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
 		addSequential(new CloseGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		addSequential(new AutoDriveCommand(-3,0,0,0.25));  // drive backwards to clear totes
-		//addSequential(new AutoDriveCommand(0,0,-1,1.5));  // turn left to put down
-		addSequential(new MoveElevatorToPositionCommand(10000, 10)); /* lower to set down */
+		addSequential(new AutoDriveCommand(-2,0,0,1.25));  // drive backwards to clear totes
+		addSequential(new WaitCommand(0.25)); //allow robot to stop
+		
+		addSequential(new MoveElevatorToPositionCommand(5000, 10)); /* lower to set down */
 		addSequential(new OpenGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+		addSequential(new AutoDriveCommand(0,0,-1,1.5));  // turn left to move backwards
 		addSequential(new AutoDriveCommand(-2,0,0,1.2));  // drive backwards to wall
 		addSequential(new AutoDriveCommand(0,0,1,1.5));  // GRotate right to align with RHS container
 	
-		addSequential(new AutoDriveCommand(1,0,0,1));  // Move forward
+		addSequential(new AutoDriveCommand(2,0,0,1.5));  // Move forward
 		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
 		addSequential(new CloseGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
