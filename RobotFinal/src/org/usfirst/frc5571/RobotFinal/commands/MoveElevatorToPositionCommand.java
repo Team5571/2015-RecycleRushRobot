@@ -63,7 +63,7 @@ public class MoveElevatorToPositionCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return ((timer.get() > moveTime)|| (Math.abs(Robot.elevator.getPosition() - targetPosition) < 200));
+		return ((timer.get() > moveTime)|| (Math.abs(Robot.elevator.getPosition() - targetPosition) < 1000));
 	}
 
 
