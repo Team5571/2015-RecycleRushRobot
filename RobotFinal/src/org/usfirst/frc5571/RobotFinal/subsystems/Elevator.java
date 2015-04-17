@@ -159,7 +159,7 @@ public class Elevator extends Subsystem {
 
 	}
 
-	
+
 	public double getPosition(){
 		return cANTalonElev.getPosition();
 	}
@@ -170,17 +170,21 @@ public class Elevator extends Subsystem {
 			servoAtThisPosition = cANTalonElev.getPosition();
 
 		}
-		if (!elevCurrenLimited()){
-			cANTalonElev.ClearIaccum();
-			cANTalonElev.setProfile(1);
-			cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
-			cANTalonElev.set(servoAtThisPosition);
-			SmartDashboard.putString("Elev Servo Status", "ServoActive");
-		}
-		else{
-			cANTalonElev.changeControlMode(CANTalon.ControlMode.PercentVbus);
-			cANTalonElev.set(0);
-			SmartDashboard.putString("Elev Servo Status", "CurrentLimited");
+
+		if (!Robot.autonomusFlag){ // dont rune servo here in auto. Switching profiles messes up the encoder
+
+			if (!elevCurrenLimited()){
+				cANTalonElev.ClearIaccum();
+				cANTalonElev.setProfile(1);
+				cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
+				cANTalonElev.set(servoAtThisPosition);
+				SmartDashboard.putString("Elev Servo Status", "ServoActive");
+			}
+			else{
+				cANTalonElev.changeControlMode(CANTalon.ControlMode.PercentVbus);
+				cANTalonElev.set(0);
+				SmartDashboard.putString("Elev Servo Status", "CurrentLimited");
+			}
 		}
 	}
 
@@ -235,7 +239,7 @@ public class Elevator extends Subsystem {
 		setDefaultCommand(new ElevatorCommand());
 
 	}
-	
+
 	public int getPositionError(){
 		return (cANTalonElev.getClosedLoopError());
 	}
@@ -253,7 +257,7 @@ public class Elevator extends Subsystem {
 		boolean revLimitSwitch = cANTalonElev.isRevLimitSwitchClosed();
 		boolean fwdLimitSwitch = cANTalonElev.isFwdLimitSwitchClosed();
 		double commandedPosition = cANTalonElev.getSetpoint();
-		
+
 
 
 		SmartDashboard.putNumber("Elev Current", currentAmps);
@@ -271,9 +275,9 @@ public class Elevator extends Subsystem {
 		SmartDashboard.putBoolean("UP Limit Switch", fwdLimitSwitch);
 		SmartDashboard.putBoolean("Elevator Homed", homed);
 		SmartDashboard.putNumber("Commanded Position", commandedPosition);
-		
-		
-		
+
+
+
 
 
 	}
