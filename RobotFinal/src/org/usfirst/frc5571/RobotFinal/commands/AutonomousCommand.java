@@ -131,7 +131,7 @@ public class  AutonomousCommand extends CommandGroup {
 		addSequential(new AutoDriveCommand(-2,0,0,1.2));  // drive backwards to wall
 		addSequential(new AutoDriveCommand(0,0,1,1.5));  // GRotate right to align with RHS container
 	
-		addSequential(new AutoDriveCommand(2,0,0,0.5));  // Move forward
+		addSequential(new AutoDriveCommand(1,0,0,0.5));  // Move forward
 		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
 		addSequential(new CloseGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
