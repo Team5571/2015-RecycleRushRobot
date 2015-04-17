@@ -46,7 +46,7 @@ public class Elevator extends Subsystem {
 	double ramprate;  // this should leave the ramp rate uncapped.
 	int profile;
 	boolean servoHereFlag = false;
-	boolean	homed = false;
+	boolean	homed;
 	double servoAtThisPosition;
 
 
@@ -78,10 +78,10 @@ public class Elevator extends Subsystem {
 		cANTalonElev.reverseSensor(false);
 		//Reverse = true for gripper motor
 		//Reverse = false for pulley
-		if ((!homed) && cANTalonElev.isRevLimitSwitchClosed()){
+		homed = false;
+		if (cANTalonElev.isRevLimitSwitchClosed()){
 			zeroElevator();
 			homed = true;
-
 		}
 	}
 
@@ -118,7 +118,7 @@ public class Elevator extends Subsystem {
 
 	public void moveToPosition(double position) {
 		servoHereFlag = false;
-		cANTalonElev.setProfile(0);
+		cANTalonElev.setProfile(1);
 		cANTalonElev.changeControlMode(CANTalon.ControlMode.Position);
 		cANTalonElev.set(position);
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
@@ -159,6 +159,10 @@ public class Elevator extends Subsystem {
 
 	}
 
+	
+	public double getPosition(){
+		return cANTalonElev.getPosition();
+	}
 
 	public void servoHere(){
 		if (!servoHereFlag){ // first time through, so set flag and get the current position
@@ -214,7 +218,7 @@ public class Elevator extends Subsystem {
 	}
 
 	public void zeroElevator(){
-		cANTalonElev.setPosition(0);;
+		cANTalonElev.setPosition(0);
 	}
 
 	public void homeElevator(){
@@ -248,6 +252,9 @@ public class Elevator extends Subsystem {
 		double encoderErr = cANTalonElev.getClosedLoopError();
 		boolean revLimitSwitch = cANTalonElev.isRevLimitSwitchClosed();
 		boolean fwdLimitSwitch = cANTalonElev.isFwdLimitSwitchClosed();
+		double commandedPosition = cANTalonElev.getSetpoint();
+		
+
 
 		SmartDashboard.putNumber("Elev Current", currentAmps);
 		SmartDashboard.putNumber("Elev Output Voltage", outputV);
@@ -261,6 +268,11 @@ public class Elevator extends Subsystem {
 		SmartDashboard.putBoolean("Elev ServoHere Flag", servoHereFlag);
 		SmartDashboard.putBoolean("Down Limit Switch", revLimitSwitch);
 		SmartDashboard.putBoolean("UP Limit Switch", fwdLimitSwitch);
+		SmartDashboard.putBoolean("UP Limit Switch", fwdLimitSwitch);
+		SmartDashboard.putBoolean("Elevator Homed", homed);
+		SmartDashboard.putNumber("Commanded Position", commandedPosition);
+		
+		
 		
 
 
