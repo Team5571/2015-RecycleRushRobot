@@ -5,6 +5,8 @@ import org.usfirst.frc5571.RobotFinal.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
+import java.lang.*;
+
 
 /**
  *
@@ -61,13 +63,13 @@ public class MoveElevatorToPositionCommand extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return ((timer.get() > moveTime) || ((Robot.elevator.getPositionError() < 200) && (Robot.elevator.getPositionError() > -200)));
+		return ((timer.get() > moveTime) ||  (Math.abs(Robot.elevator.getPositionError()) < 200));
 	}
 
 
 	// Called once after isFinished returns true
 	protected void end() {
-		//Robot.elevator.servoHere();
+		Robot.elevator.servoHere();
 		timer.stop();
 	}
 

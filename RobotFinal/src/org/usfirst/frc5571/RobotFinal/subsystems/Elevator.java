@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj.can.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.lang.*;
+
 
 /**
  *
@@ -43,7 +45,7 @@ public class Elevator extends Subsystem {
 	int izone;
 	double ramprate;  // this should leave the ramp rate uncapped.
 	int profile;
-	boolean servoHereFlag;
+	boolean servoHereFlag = false;
 	boolean	homed = false;
 	double servoAtThisPosition;
 
@@ -76,12 +78,11 @@ public class Elevator extends Subsystem {
 		cANTalonElev.reverseSensor(false);
 		//Reverse = true for gripper motor
 		//Reverse = false for pulley
-		if (!homed && cANTalonElev.isRevLimitSwitchClosed()){
+		if ((!homed) && cANTalonElev.isRevLimitSwitchClosed()){
 			zeroElevator();
 			homed = true;
 
 		}
-
 	}
 
 	public void limitSwitchInit() {

@@ -35,7 +35,7 @@ public class  ElevatorCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		elevController.initCanPID();
+		//elevController.initCanPID();   BG:  Moved this to the init under robot so it runs before autonomous
 		//elevController.initElevLimits();
 		SmartDashboard.putString("Elevatorlev MODE:", "Initialized");
 		position_held = false;
