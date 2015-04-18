@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 import org.usfirst.frc5571.RobotFinal.Robot;
 import org.usfirst.frc5571.RobotFinal.RobotMap;
+import org.usfirst.frc5571.RobotFinal.subsystems.Elevator;
 
 
 /**
@@ -67,8 +68,11 @@ public class  AutonomousLindGambit extends CommandGroup {
 		
 		
 		/************* Bulldogs Defense Requires The Elevator to be pre placed **************************/
-		//addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/		addParallel(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
-		addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
+		if (Robot.elevator.downLimitReached()){  /* On case drive team forgets to raise the elevator */
+			addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
+		}
+		addSequential(new AutoDriveCommand(0,0,3,0.4));  // Good 90 degree turn timing
+		//addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
 		addSequential(new OpenGripperCommand(5));
 		addSequential(new AutoDriveCommand(1, 0, 0, .5));
 		/************* Bulldogs Defense **************************/

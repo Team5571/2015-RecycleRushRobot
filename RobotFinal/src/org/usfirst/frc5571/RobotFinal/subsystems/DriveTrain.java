@@ -69,7 +69,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
-			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1* direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
+			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1.0* direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
 	    }
     
 	  public double correctDeadSpot(double value) {

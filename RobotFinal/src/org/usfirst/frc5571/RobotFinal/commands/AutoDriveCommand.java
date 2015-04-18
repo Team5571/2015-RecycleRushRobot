@@ -36,7 +36,7 @@ public class AutoDriveCommand extends Command {
 	protected void initialize() {
 		timer.reset();
 		timer.start();
-		Robot.driveTrain.mecanumDriveAutoFine(autoMagnitude, autoDriveDuration, autoRotation);
+		Robot.driveTrain.mecanumDriveAutoFine(autoMagnitude, autoDirection, autoRotation);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

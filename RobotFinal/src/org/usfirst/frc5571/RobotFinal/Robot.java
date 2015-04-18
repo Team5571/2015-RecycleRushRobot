@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 
 
 
+
 import org.usfirst.frc5571.RobotFinal.Robot;
 import org.usfirst.frc5571.RobotFinal.commands.*;
 import org.usfirst.frc5571.RobotFinal.subsystems.*;
@@ -88,6 +89,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("1) Do Nothing", new AutonomousDoNothing());
 		chooser.addObject("2) Lind Gambit (Protect Containers)", new AutonomousLindGambit());
 		chooser.addObject("3) Grab Containers Left To Right", new AutonomousGrab2Containers());
+		chooser.addObject("4) Strafing Grab Containers Left To Right", new AutonomousGrab2ContainersWithStrafing());
 
 		// show the autonomous modes
 		SmartDashboard.putData("AutonomousModes", chooser);
