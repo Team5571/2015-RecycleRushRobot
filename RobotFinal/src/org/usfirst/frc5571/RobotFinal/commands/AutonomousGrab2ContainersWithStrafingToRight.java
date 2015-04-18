@@ -34,7 +34,7 @@ import org.usfirst.frc5571.RobotFinal.RobotMap;
 
 
 
-public class  AutonomousGrab2ContainersWithStrafing extends CommandGroup {
+public class  AutonomousGrab2ContainersWithStrafingToRight extends CommandGroup {
 	// Flag to end the command
 	public Boolean autoDone = false;
 	//Boolean autoDriveCommandInProgress = false;
@@ -49,7 +49,7 @@ public class  AutonomousGrab2ContainersWithStrafing extends CommandGroup {
 	static double DRIVE_TO_AUTO	= 10.0;	/* 1.2 seconds to go from start posision to auto zone */
 	static double TIME_TO_ROTATE_90_DEGREES = 0.67;  /*  0.67 seconds estimated to rotate left */
 
-	public AutonomousGrab2ContainersWithStrafing() {
+	public AutonomousGrab2ContainersWithStrafingToRight() {
 		
 
 		// Use requires() here to declare subsystem dependencies
@@ -104,7 +104,7 @@ public class  AutonomousGrab2ContainersWithStrafing extends CommandGroup {
 		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
 		addSequential(new CloseGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		addSequential(new AutoDriveCommand(-2,0,0,0.3));  // drive backwards to clear totes
+		addSequential(new AutoDriveCommand(-2,0,0,0.35));  // drive backwards to clear totes
 		addSequential(new WaitCommand(0.5)); //allow robot to stop
 		addSequential(new MoveElevatorToPositionCommand(28000, 10)); /* lower to clear totes in landfill 16000 picks up*/
 		
