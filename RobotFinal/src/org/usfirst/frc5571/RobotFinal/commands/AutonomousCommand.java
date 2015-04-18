@@ -71,10 +71,11 @@ public class  AutonomousCommand extends CommandGroup {
 		 */
 		
 		
-		/************* Bulldogs Defense **************************/
-//		addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-//		addParallel(new AutoDriveCommand(0,0,1,1.7));  // Good 90 degree turn timing
-//		addSequential(new OpenGripperCommand(4));
+		/************* Bulldogs Defense Requires The Elevator to be pre placed **************************/
+		//addSequential(new MoveElevatorToPositionCommand(32000, 10)); /* raise to clear totes in landfill 16000 picks up*/		addParallel(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
+//		addSequential(new AutoDriveCommand(0,0,1,1.5));  // Good 90 degree turn timing
+//		addSequential(new OpenGripperCommand(5));
+//		addSequential(new AutoDriveCommand(1, 0, 0, .5));
 		/************* Bulldogs Defense **************************/
 		
 		/************************** Grab Both Containers Left then right ****************/
@@ -135,7 +136,7 @@ public class  AutonomousCommand extends CommandGroup {
 		addSequential(new MoveElevatorToPositionCommand(16000, 10)); /* lower to  16000 to picks up containers */
 		addSequential(new CloseGripperCommand(4));
 		addSequential(new MoveElevatorToPositionCommand(35000, 10)); /* raise to clear totes in landfill 16000 picks up*/
-		
+		/************************** Grab Both Containers Left then right puts down 1st on totes  but don
 		
 		
 		//		addSequential(new AutoDriveCommand(0,0,-1,3.5));  // turn left to put down

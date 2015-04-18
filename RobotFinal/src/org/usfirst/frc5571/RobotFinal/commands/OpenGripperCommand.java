@@ -36,7 +36,7 @@ public class OpenGripperCommand extends Command {
 		timer.start();
 
 		// initialize PID profiles for gripper
-		Robot.clamp.initCanPID();
+		//Robot.clamp.initCanPID();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
