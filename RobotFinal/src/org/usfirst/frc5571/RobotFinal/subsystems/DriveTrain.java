@@ -36,10 +36,16 @@ public class DriveTrain extends Subsystem {
     RobotDrive robotDrive41 = RobotMap.driveTrainRobotDrive41;
     
     // Scaling factors to adjust drive sensitivity. Start button used to selct fast drive
+   /* Changed these to be identical to what we used at SmokeyMountain but fixed the error in the drive 
+    * call method which incorrectly applied twist to magnitude and vice versa
+    */
     static double FAST_DRIVE_MAGNITUDE_SCALE = 0.5;
-    static double FAST_DRIVE_TWIST_SCALE = 0.6;
+    static double FAST_DRIVE_TWIST_SCALE = 0.75;
     static double FINE_DRIVE_MAGNITUDE_SCALE = 0.3;
-    static double FINE_DRIVE_TWIST_SCALE = 0.4;
+    static double FINE_DRIVE_TWIST_SCALE = 0.45;
+    
+    
+    // All sutonomous testing done with the following scale factors
     static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = FINE_DRIVE_MAGNITUDE_SCALE;
     static double AUTO_FINE_DRIVE_TWIST_SCALE =FINE_DRIVE_TWIST_SCALE;
 

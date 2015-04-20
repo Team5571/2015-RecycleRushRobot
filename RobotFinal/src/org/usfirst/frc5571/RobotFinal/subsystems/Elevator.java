@@ -165,14 +165,15 @@ public class Elevator extends Subsystem {
 	}
 
 	public void servoHere(){
-		if (!servoHereFlag){ // first time through, so set flag and get the current position
-			servoHereFlag = true;
-			servoAtThisPosition = cANTalonElev.getPosition();
-
-		}
+		
 
 		if (!Robot.autonomusFlag){ // dont rune servo here in auto. Switching profiles messes up the encoder
 
+			if (!servoHereFlag){ // first time through, so set flag and get the current position
+				servoHereFlag = true;
+				servoAtThisPosition = cANTalonElev.getPosition();
+
+			}
 			if (!elevCurrenLimited()){
 				cANTalonElev.ClearIaccum();
 				cANTalonElev.setProfile(1);
