@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("2) Lind Gambit (Protect Containers)", new AutonomousLindGambit());
 		chooser.addObject("3) Grab Containers Left To Right", new AutonomousGrab2Containers());
 		chooser.addObject("4) Strafing Grab Containers To Right", new AutonomousGrab2ContainersWithStrafingToRight());
-		//chooser.addObject("5) Strafing Grab Containers To Left", new AutonomousGrab2ContainersWithStrafingToLeft());
+		chooser.addObject("5) Strafing Grab Containers To Left", new AutonomousGrab2ContainersWithStrafingToLeft());
 
 		// show the autonomous modes
 		SmartDashboard.putData("AutonomousModes", chooser);
