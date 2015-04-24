@@ -44,7 +44,7 @@ public class  ElevatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevController.showCanTalonStatus();
+    	//BG elevController.showCanTalonStatus();
     	if ((Robot.oi.right_yAxis * .5) <= -0.10) { // close clamp with current limited protection
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
