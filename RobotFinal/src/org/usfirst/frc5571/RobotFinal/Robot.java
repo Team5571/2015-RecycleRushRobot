@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.CameraServer;
+
 import org.usfirst.frc5571.RobotFinal.Robot;
 import org.usfirst.frc5571.RobotFinal.commands.*;
 import org.usfirst.frc5571.RobotFinal.subsystems.*;
@@ -86,6 +87,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("3) Grab Containers Left To Right", new AutonomousGrab2Containers());
 		chooser.addObject("4) Strafing Grab Containers To Right", new AutonomousGrab2ContainersWithStrafingToRight());
 		chooser.addObject("5) Strafing Grab Containers To Left", new AutonomousGrab2ContainersWithStrafingToLeft());
+		chooser.addObject("6) Left Side Grab Containers To Left", new AutonomousLeftSideGrab2ContainersWithStrafingToLeft());
 
 		// show the autonomous modes
 		SmartDashboard.putData("AutonomousModes", chooser);
