@@ -16,6 +16,7 @@ import org.usfirst.frc5571.RobotFinal.RobotMap;
 import org.usfirst.frc5571.RobotFinal.commands.*;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.can.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -95,7 +96,7 @@ public class Elevator extends Subsystem {
 		servoHereFlag = false;
 		cANTalonElev.ClearIaccum();
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
+		cANTalonElev.changeControlMode(TalonControlMode.Position);
 		cANTalonElev.set(cANTalonElev.getPosition());
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 		cANTalonElev.ClearIaccum();
@@ -109,7 +110,7 @@ public class Elevator extends Subsystem {
 	public void positionMoveByCount(double count) {
 		servoHereFlag = false;
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
+		cANTalonElev.changeControlMode(TalonControlMode.Position);
 		cANTalonElev.set((cANTalonElev.getPosition()+count));
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 		cANTalonElev.ClearIaccum();
@@ -119,7 +120,7 @@ public class Elevator extends Subsystem {
 	public void moveToPosition(double position) {
 		servoHereFlag = false;
 		cANTalonElev.setProfile(1);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
+		cANTalonElev.changeControlMode(TalonControlMode.Position);
 		cANTalonElev.set(position);
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 		cANTalonElev.ClearIaccum();
@@ -130,7 +131,7 @@ public class Elevator extends Subsystem {
 	public void speedMode() {
 		servoHereFlag = false;
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
+		cANTalonElev.changeControlMode(TalonControlMode.Speed);
 		axis = Robot.oi.xboxController.getY();
 		cANTalonElev.set(axis*12.0); // need to scale the voltage by the joystick values;
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
@@ -141,7 +142,7 @@ public class Elevator extends Subsystem {
 	public void downElev() {
 		servoHereFlag = false;
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
+		cANTalonElev.changeControlMode(TalonControlMode.Speed);
 		cANTalonElev.set(DOWN_SPEED);
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 		cANTalonElev.ClearIaccum();
@@ -153,7 +154,7 @@ public class Elevator extends Subsystem {
 		servoHereFlag = false;
 		cANTalonElev.ClearIaccum();
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
+		cANTalonElev.changeControlMode(TalonControlMode.Speed);
 		cANTalonElev.set(UP_SPEED);
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 
@@ -177,12 +178,12 @@ public class Elevator extends Subsystem {
 			if (!elevCurrenLimited()){
 				cANTalonElev.ClearIaccum();
 				cANTalonElev.setProfile(1);
-				cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
+				cANTalonElev.changeControlMode(TalonControlMode.Position);
 				cANTalonElev.set(servoAtThisPosition);
 				SmartDashboard.putString("Elev Servo Status", "ServoActive");
 			}
 			else{
-				cANTalonElev.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+				cANTalonElev.changeControlMode(TalonControlMode.PercentVbus);
 				cANTalonElev.set(0);
 				SmartDashboard.putString("Elev Servo Status", "CurrentLimited");
 			}
@@ -197,14 +198,14 @@ public class Elevator extends Subsystem {
 	public void holdCurrentPosition(){
 		servoHereFlag = false;
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
+		cANTalonElev.changeControlMode(TalonControlMode.Position);
 		cANTalonElev.set(cANTalonElev.getPosition());
 	}
 
 	public void disable_ElevMotor(){
 		servoHereFlag = false;
 		cANTalonElev.setProfile(0);
-		cANTalonElev.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+		cANTalonElev.changeControlMode(TalonControlMode.PercentVbus);
 		cANTalonElev.set(0);
 		SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
 
