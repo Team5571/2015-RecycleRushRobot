@@ -3,7 +3,7 @@ package org.usfirst.frc5571.RobotFinal.commands;
 import org.usfirst.frc5571.RobotFinal.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.hal.CanTalonSRX;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
 
