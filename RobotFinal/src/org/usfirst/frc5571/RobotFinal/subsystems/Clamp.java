@@ -93,7 +93,7 @@ public class Clamp extends Subsystem {
 		cANTalonClamp.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		
 		// Initially set to run Open Loop Mode on joystick Y command. 
-		//		cANTalonClamp.changeControlMode(TalonControlMode.Voltage);
+		//		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Voltage);
 		//		axis = Robot.oi.xboxController.getY();
 		//		cANTalonClamp.set(axis); //This will not work because this is only initialized at the start.
 	}
@@ -103,7 +103,7 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
-		cANTalonClamp.changeControlMode(TalonControlMode.Position);
+		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Position);
 		cANTalonClamp.set(cANTalonClamp.getPosition());
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 	}
@@ -113,7 +113,7 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
-		cANTalonClamp.changeControlMode(TalonControlMode.Position);
+		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Position);
 		cANTalonClamp.set((cANTalonClamp.getPosition()+count));
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 
@@ -124,7 +124,7 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
-		cANTalonClamp.changeControlMode(TalonControlMode.Speed);
+		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Speed);
 		axis = Robot.oi.xboxController.getY();
 		cANTalonClamp.set(axis*12.0); // need to scale the voltage by the joystick values;
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
@@ -145,7 +145,7 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
-		cANTalonClamp.changeControlMode(TalonControlMode.Speed);
+		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Speed);
 		cANTalonClamp.set(OPEN_SPEED);
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 
@@ -161,13 +161,13 @@ public class Clamp extends Subsystem {
 
 		}
 		if (!clampCuurenLimited()){
-			cANTalonClamp.changeControlMode(TalonControlMode.Position);
+			cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Position);
 			cANTalonClamp.ClearIaccum();
 			cANTalonClamp.set(servoAtThisPosition);
 			SmartDashboard.putString("Clamp Servo Status", "ServoActive");
 		}
 		else{
-			cANTalonClamp.changeControlMode(TalonControlMode.PercentVbus);
+			cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 			cANTalonClamp.set(.0);
 			SmartDashboard.putString("Clamp Servo Status", "CurrentLimited");
 		}
@@ -179,7 +179,7 @@ public class Clamp extends Subsystem {
 	public void disable_ClampMotor(){
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
-		cANTalonClamp.changeControlMode(TalonControlMode.PercentVbus);
+		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
 		cANTalonClamp.set(0);
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 
@@ -196,7 +196,7 @@ public class Clamp extends Subsystem {
 //	public void voltageMode() {
 //		servoHereFlag = false;
 //		//cANTalonClamp.setProfile(0);
-//		cANTalonClamp.changeControlMode(TalonControlMode.Voltage);
+//		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Voltage);
 //		axis = Robot.oi.xboxController.getY();
 //		cANTalonClamp.set(axis);
 //		SmartDashboard.putString("Servo Status", "Servo Inactive");
