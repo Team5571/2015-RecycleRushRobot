@@ -166,72 +166,7 @@ public class Elevator extends Subsystem {
 
 	public void servoHere(){
 		
-<<<<<<< HEAD
-		public void limitSwitchInit() {
-			cANTalonElev.enableBrakeMode(true);
-			cANTalonElev.enableLimitSwitch(true, true);
-		}
 
-		// Change to closed loop control mode and hold the current position
-		public void positionMode() {
-			servoHereFlag = false;
-			cANTalonElev.ClearIaccum();
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
-			cANTalonElev.set(cANTalonElev.getPosition());
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-			cANTalonElev.ClearIaccum();
-			
-			//
-			
-			
-		}
-
-		// Change to closed loop control mode and move "count" ticks 
-		public void positionMoveByCount(double count) {
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
-			cANTalonElev.set((cANTalonElev.getPosition()+count));
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-			cANTalonElev.ClearIaccum();
-
-		}
-
-		// Change to Closed Loop Velocity Mode and
-		public void speedMode() {
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
-			axis = Robot.oi.xboxController.getY();
-			cANTalonElev.set(axis*12.0); // need to scale the voltage by the joystick values;
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-			cANTalonElev.ClearIaccum();
-
-		}
-
-		public void downElev() {
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
-			cANTalonElev.set(DOWN_SPEED);
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-			cANTalonElev.ClearIaccum();
-			
-
-		}
-
-		public void upElev() {
-			servoHereFlag = false;
-			cANTalonElev.ClearIaccum();
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Speed);
-			cANTalonElev.set(UP_SPEED);
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-
-		}
-=======
->>>>>>> bobbyautinomous
 
 		if (!Robot.autonomusFlag){ // dont rune servo here in auto. Switching profiles messes up the encoder
 
@@ -258,22 +193,6 @@ public class Elevator extends Subsystem {
 	public Boolean isHomed(){
 		return (homed);
 	}
-
-<<<<<<< HEAD
-		public void holdCurrentPosition(){
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.Position);
-			cANTalonElev.set(cANTalonElev.getPosition());
-		}
-
-		public void disable_ElevMotor(){
-			servoHereFlag = false;
-			cANTalonElev.setProfile(0);
-			cANTalonElev.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-			cANTalonElev.set(0);
-			SmartDashboard.putString("Elev Servo Status", "Servo Inactive");
-=======
 
 	public void holdCurrentPosition(){
 		servoHereFlag = false;
@@ -358,7 +277,6 @@ public class Elevator extends Subsystem {
 		SmartDashboard.putBoolean("Elevator Homed", homed);
 		SmartDashboard.putNumber("Commanded Position", commandedPosition);
 
->>>>>>> bobbyautinomous
 
 
 

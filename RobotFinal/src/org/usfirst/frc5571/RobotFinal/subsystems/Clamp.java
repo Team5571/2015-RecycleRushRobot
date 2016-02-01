@@ -135,11 +135,7 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
-<<<<<<< HEAD
-		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Speed);
-=======
 		cANTalonClamp.changeControlMode(TalonControlMode.Speed);
->>>>>>> bobbyautinomous
 		cANTalonClamp.set(CLOSE_SPEED);
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 
