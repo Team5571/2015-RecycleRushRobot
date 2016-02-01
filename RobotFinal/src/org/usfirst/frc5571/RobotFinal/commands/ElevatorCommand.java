@@ -35,21 +35,22 @@ public class  ElevatorCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		elevController.initCanPID();
+		//elevController.initCanPID();   BG:  Moved this to the init under robot so it runs before autonomous
 		//elevController.initElevLimits();
 		SmartDashboard.putString("Elevatorlev MODE:", "Initialized");
 		position_held = false;
-		//elevController.showCanTalonStatus();
+		elevController.showCanTalonStatus();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//BG elevController.showCanTalonStatus();
     	if ((Robot.oi.right_yAxis * .5) <= -0.10) { // close clamp with current limited protection
 			// axis = Robot.oi.xboxController.getY();
 			// RobotMap.testCAN_MotorCANTalon1.set(axis);
 			// elevController.positionMode();
 			// SmartDashboard.putString("MODE:", "Position");
-			// elevController.showCanTalonStatus();
+			 //elevController.showCanTalonStatus();
 			// Close Clamp
 			if (!elevController.elevCurrenLimited()) {
 				elevController.upElev();
@@ -90,6 +91,7 @@ public class  ElevatorCommand extends Command {
 		else {
 			SmartDashboard.putString("Elevator MODE:", "HOLD POSITION");
 			elevController.servoHere();
+			//elevController.showCanTalonStatus();
 		}
 		// Display status on every execute call
 		//elevController.showCanTalonStatus();

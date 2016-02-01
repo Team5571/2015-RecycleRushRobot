@@ -17,6 +17,7 @@ import org.usfirst.frc5571.RobotFinal.RobotMap;
 import org.usfirst.frc5571.RobotFinal.commands.*;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.can.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,9 +32,9 @@ public class Clamp extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	double axis;
-	static double MAX_CLAMP_CURRENT = 25.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
-	static double CLOSE_SPEED = 400;  // change in encoder position  per 10 ms
-	static double OPEN_SPEED = -200;  // change in encoder position  per 10 ms
+	static double MAX_CLAMP_CURRENT = 50.0;  // limit current to 10A x 12V = 120W  mini CIM motor is rated at 230W and 86A Stall Current
+	static double CLOSE_SPEED = 600;  // change in encoder position  per 10 ms
+	static double OPEN_SPEED = -400;  // change in encoder position  per 10 ms
 	double p;
 	double i;;
 	double d;
@@ -134,7 +135,11 @@ public class Clamp extends Subsystem {
 		servoHereFlag = false;
 		cANTalonClamp.setProfile(0);
 		cANTalonClamp.ClearIaccum();
+<<<<<<< HEAD
 		cANTalonClamp.changeControlMode(CANTalon.TalonControlMode.Speed);
+=======
+		cANTalonClamp.changeControlMode(TalonControlMode.Speed);
+>>>>>>> bobbyautinomous
 		cANTalonClamp.set(CLOSE_SPEED);
 		SmartDashboard.putString("Clamp Servo Status", "Servo Inactive");
 
@@ -154,7 +159,7 @@ public class Clamp extends Subsystem {
 	public void servoHere(){
 		if (!servoHereFlag){ // first time through, so set flag and get the current position
 			servoHereFlag = true;
-			servoAtThisPosition = cANTalonClamp.getPosition()+32;
+			servoAtThisPosition = cANTalonClamp.getPosition()+50;
 			//cANTalonClamp.ClearIaccum();
 			cANTalonClamp.setProfile(1);
 
@@ -184,7 +189,14 @@ public class Clamp extends Subsystem {
 
 	}
 
+	public boolean openLimitReached(){
+		return (cANTalonClamp.isRevLimitSwitchClosed());
+	}
 
+	public boolean closedLimitReached(){
+		return (cANTalonClamp.isFwdLimitSwitchClosed());
+	}
+	
 //	public void voltageMode() {
 //		servoHereFlag = false;
 //		//cANTalonClamp.setProfile(0);

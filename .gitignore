@@ -1,0 +1,6 @@
+*.class
+*.jar
+RobotFinal/sysProps.xml
+RobotFinal/dist/FRCUserProgram.jar
+*.xml
+*.jar

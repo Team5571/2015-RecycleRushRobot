@@ -35,16 +35,48 @@ public class DriveTrain extends Subsystem {
     CANTalon cANTalonFrontRight = RobotMap.driveTrainCANTalonFrontRight;
     RobotDrive robotDrive41 = RobotMap.driveTrainRobotDrive41;
     
+    // Scaling factors to adjust drive sensitivity. Start button used to selct fast drive
+   /* Changed these to be identical to what we used at SmokeyMountain but fixed the error in the drive 
+    * call method which incorrectly applied twist to magnitude and vice versa
+    */
+    static double FAST_DRIVE_MAGNITUDE_SCALE = 0.5;
+    static double FAST_DRIVE_TWIST_SCALE = 0.75;
+    static double FINE_DRIVE_MAGNITUDE_SCALE = 0.3;
+    static double FINE_DRIVE_TWIST_SCALE = 0.45;
+    
+    
+    // All sutonomous testing done with the following scale factors
+    static double AUTO_FINE_DRIVE_MAGNITUDE_SCALE = FINE_DRIVE_MAGNITUDE_SCALE;
+    static double AUTO_FINE_DRIVE_TWIST_SCALE =FINE_DRIVE_TWIST_SCALE;
+
+    
+   
     public void initInvert() {
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
     	RobotMap.driveTrainRobotDrive41.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     }
     
+   
+    
 	public void mecanumDrive_Polar() {
-	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * .60);  
-	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * .50), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
+		double magnitudeScaleFactor;
+		double twistScaleFactor;
+		if (Robot.oi.Start_Button){
+			magnitudeScaleFactor = FAST_DRIVE_MAGNITUDE_SCALE;
+			twistScaleFactor = FAST_DRIVE_TWIST_SCALE;
+		}
+		else
+		{
+			magnitudeScaleFactor = FINE_DRIVE_MAGNITUDE_SCALE;
+			twistScaleFactor = FINE_DRIVE_TWIST_SCALE;
+		}
+	    double triggerTwist = (((Robot.oi.xboxController.getRawAxis(2) * -1) + Robot.oi.xboxController.getRawAxis(3)) * twistScaleFactor);  
+	    robotDrive41.mecanumDrive_Polar(correctDeadSpot( Robot.oi.xboxController.getMagnitude() * magnitudeScaleFactor), -Robot.oi.xboxController.getDirectionDegrees(), triggerTwist);
 	}
 
+	public void mecanumDriveAutoFine(double magnitude, double direction, double rotation){
+			robotDrive41.mecanumDrive_Polar(magnitude * AUTO_FINE_DRIVE_MAGNITUDE_SCALE, -1.0* direction, rotation * AUTO_FINE_DRIVE_TWIST_SCALE);
+	    }
     
 	  public double correctDeadSpot(double value) {
 	    	double deadZone = 0.10; 					//This sets a deadzone that i have seen works for Xbox controllers online

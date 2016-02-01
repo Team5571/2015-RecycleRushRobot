@@ -54,14 +54,16 @@ public class RobotMap {
     	driveTrainRobotDrive41 = new RobotDrive(driveTrainCANTalonRearLeft, driveTrainCANTalonFrontLeft,
                 driveTrainCANTalonRearRight, driveTrainCANTalonFrontRight);
         
-        driveTrainRobotDrive41.setSafetyEnabled(true);
-        driveTrainRobotDrive41.setExpiration(0.1);
-        driveTrainRobotDrive41.setSensitivity(0.5);
-        driveTrainRobotDrive41.setMaxOutput(1.0);
+    	driveTrainRobotDrive41.setSafetyEnabled(false);
+//        driveTrainRobotDrive41.setExpiration(0.1);
+//        driveTrainRobotDrive41.setSensitivity(0.5);
+//        driveTrainRobotDrive41.setMaxOutput(1.0);
 
         clampCANTalonClamp = new CANTalon(7);
+        clampCANTalonClamp.setSafetyEnabled(false);
         
         
         elevatorCANTalonElev = new CANTalon(5);
+        elevatorCANTalonElev.setSafetyEnabled(false);
     }
 }
